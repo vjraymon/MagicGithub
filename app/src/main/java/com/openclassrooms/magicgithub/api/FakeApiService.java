@@ -13,7 +13,6 @@ import static com.openclassrooms.magicgithub.api.FakeApiServiceGenerator.generat
 public class FakeApiService implements ApiService {
 
     private List<User> users = generateUsers();
-    private Random rand = new Random();
 
     /**
      * Return a list of {@link User}
@@ -29,22 +28,10 @@ public class FakeApiService implements ApiService {
      * Generate a random {@link User} and add it {@link FakeApiService#users} list.
      * This user must be get from the {@link FakeApiServiceGenerator#FAKE_USERS_RANDOM} list.
      */
-    private User randomUserSelection() {
-        List<User> randomUsers = new ArrayList<>(Arrays.asList());
-        for (User user : FAKE_USERS_RANDOM) {
-            if (!users.contains(user)) { randomUsers.add(user); }
-        }
-        if (randomUsers.isEmpty()) return null;
-        int int_random = rand.nextInt(randomUsers.size());
-        return randomUsers.get(int_random);
-    }
     @Override
     public void generateRandomUser() {
         // TODO: A modifier
-        User user = randomUserSelection();
-        if (user != null) {
-            users.add(user);
-        }
+        users.add(User.random());
     }
 
     /**
